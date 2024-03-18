@@ -12,6 +12,7 @@ import { createAddressMock } from '../__mocks__/create-address.mock';
 
 describe('AddressService', () => {
   let service: AddressService;
+  let addressRepository: Repository<AddressEntity>;
   let userService: UserService;
   let cityService: CityService;
 
