@@ -87,10 +87,10 @@ describe('AddressService', () => {
   });
 
   it('should return not found if address is not registred', async () => {
-    jest.spyOn(addressRepository, 'find').mockResolvedValue(undefined);
-
-    expect(
+    jest.spyOn(addressRepository, 'find').mockResolvedValue([]); // Retornar um array vazio
+  
+    await expect(
       service.findAddressByUserId(userEntityMock.id),
-    ).resolves.toThrowError();
+    ).rejects.toThrowError(`Address not found for userId ${userEntityMock.id}`);
   });
 });
