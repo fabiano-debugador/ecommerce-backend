@@ -1,4 +1,3 @@
-import { join } from 'path';
 import { CategoryEntity } from '../../category/entities/category.entity';
 import {
   Column,
@@ -25,7 +24,7 @@ export class ProductEntity {
   price: number;
 
   @Column({ name: 'image', nullable: false })
-  image: number;
+  image: string;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
@@ -33,8 +32,10 @@ export class ProductEntity {
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
-  @ManyToOne(() => CategoryEntity, (category: CategoryEntity) => category.products)
-  
+  @ManyToOne(
+    () => CategoryEntity,
+    (category: CategoryEntity) => category.products,
+  )
   @JoinColumn({ name: 'category_id', referencedColumnName: 'id' })
   category?: CategoryEntity;
 }

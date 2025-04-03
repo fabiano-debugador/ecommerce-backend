@@ -5,7 +5,6 @@ import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { categoryMock } from '../__mocks__/category.mock';
 import { createCategoryMock } from '../__mocks__/create-category.mock';
-import { find } from 'rxjs';
 
 describe('CategoryService', () => {
   let service: CategoryService;
@@ -47,12 +46,10 @@ describe('CategoryService', () => {
     expect(service.findAllCategories()).rejects.toThrowError();
   });
 
-
   it('should return error when list of category is empty', async () => {
     jest.spyOn(categoryRepository, 'find').mockRejectedValue(new Error());
     expect(service.findAllCategories()).rejects.toThrowError();
   });
-
 
   it('should return error if exists category name', async () => {
     expect(service.createCategory(createCategoryMock)).rejects.toThrowError();
@@ -67,7 +64,9 @@ describe('CategoryService', () => {
 
   it('should return error if category find by name is empty', async () => {
     jest.spyOn(categoryRepository, 'findOne').mockResolvedValue(undefined);
-    expect(service.findCategoryByName(categoryMock.name)).rejects.toThrowError();
+    expect(
+      service.findCategoryByName(categoryMock.name),
+    ).rejects.toThrowError();
   });
 
   it('should return error exception', async () => {

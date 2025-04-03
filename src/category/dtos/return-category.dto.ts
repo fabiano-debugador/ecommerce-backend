@@ -1,4 +1,4 @@
-import { CategoryEntity } from "../entities/category.entity";
+import { CategoryEntity } from '../entities/category.entity';
 
 export class ReturnCategory {
   id: number;

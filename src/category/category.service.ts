@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CategoryEntity } from './entities/category.entity';
@@ -29,19 +33,23 @@ export class CategoryService {
     if (!category) {
       throw new NotFoundException(`Category with name ${name} not found`);
     }
-    
+
     return category;
   }
 
-  async createCategory(createCategory: CreateCategory): Promise<CategoryEntity> {
+  async createCategory(
+    createCategory: CreateCategory,
+  ): Promise<CategoryEntity> {
     const category = await this.findCategoryByName(createCategory.name).catch(
-      () => undefined
+      () => undefined,
     );
 
     if (category) {
-      throw new BadRequestException(`Category with name ${createCategory.name} already exists`);
+      throw new BadRequestException(
+        `Category with name ${createCategory.name} already exists`,
+      );
     }
-    
+
     return this.categoryRepository.save(createCategory);
   }
 }
