@@ -27,8 +27,8 @@ export class CategoryService {
 
   async findCategoryById(categoryId: number): Promise<CategoryEntity> {
     const category = await this.categoryRepository.findOne({
-      where: { 
-        id: categoryId 
+      where: {
+        id: categoryId,
       },
     });
     if (!category) {
